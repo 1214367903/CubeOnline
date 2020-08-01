@@ -32,7 +32,7 @@
    
    目前后端提供```/user/login```,```/room/create```和```/room/random```三个http接口, 负责用户的登录, 以及为用户提供可加入的房间号码. 其工作流程如下:
 
-   ![http_img](/project/pictures/http.png)
+   ![http_img](https://github.com/1214367903/CubeOnline/blob/master/pictures/http.png)
 ### 2. WebSocket部分
    
    获取到房间号之后, 用户就可以进入房间页面, 创建WebSocket连接与后端进行通信.
@@ -53,7 +53,7 @@
 
 进入room页面, 小程序的状态机如下:
 
-![app_img](/project/pictures/app.png)
+![app_img](https://github.com/1214367903/CubeOnline/blob/master/pictures/app.png)
 
 在本项目的WebSocket通信中, 后端是被动的一方. 它不主动搞事或者发消息, 而是在接收到前端的消息之后, 基于对应的事件处理方法进行回应.
 
@@ -65,7 +65,7 @@
 
 该组件负责对从前端获得的数据进行提取和验证, 支持处理**字典dict**, **字符串string**和**字节bytes**格式的数据, 其中字符串和字节会自动解码. 这个组件的工作原理如下图所示:
 
-![form_img](/project/pictures/form.png)
+![form_img](https://github.com/1214367903/CubeOnline/blob/master/pictures/form.png)
 
 如有需要, 你可以通过继承的方式自定义新的Field和Form类, 完成更多数据类型和格式验证. 这个组件的源代码可见[forms](server/form/forms.py)和[fields](server/form/fields.py).
 
