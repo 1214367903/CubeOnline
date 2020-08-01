@@ -1,0 +1,203 @@
+.information {
+    color: red;
+    text-align: center;
+    padding: 10rpx;
+    padding-top: 24rpx;
+    font-size: 36rpx;
+}
+
+view.scramble {
+    text-align: center;
+    padding: 16rpx;
+    font-weight: bolder;
+}
+
+.tag {
+    display: inline-block;
+    background-color: #1AAD19;
+    border-radius: 16%;
+    color: white;
+    font-weight: 900;
+    padding: 0rpx 10rpx;
+}
+
+.room-settings {
+    display: inline-block;
+    width: 40%;
+    font-size: 32rpx;
+    text-align: center;
+}
+
+.title-icon {
+    display: inline-block;
+    width: 10%;
+    text-align: center;
+}
+
+.member-title {
+    background-color: #1AAD19;
+    color: white;
+    font-weight: bolder;
+    width: 1344rpx;
+}
+
+.member-row {
+    font-weight: bold;
+    width: 1344rpx;
+    border-top: outset;
+}
+
+.user-style {
+    color: brown;
+}
+
+.table-cell {
+    display: inline-block;
+    width: 192rpx;
+    padding: 12rpx 0rpx;
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+}
+
+.big-table-cell {
+    display: inline-block;
+    width: 256rpx;
+    padding: 12rpx 0rpx;
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+}
+
+
+.small-table-cell {
+    display: inline-block;
+    width: 128rpx;
+    padding: 12rpx 0rpx;
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+}
+
+.state-icon {
+    vertical-align: middle;
+}
+
+.member-icon {
+    width: 56rpx;
+    height: 56rpx;
+    padding: 4rpx;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.member-name {
+    vertical-align: middle;
+    padding: 0rpx;
+}
+
+.personal-best {
+    border-radius: 24%;
+    vertical-align: middle;
+    background-color: red;
+    color: white;
+    font-weight: bolder;
+    position: absolute;
+    right: 0rpx;
+}
+
+.notice-bar {
+    padding: 16rpx;
+    margin: 10rpx;
+    vertical-align: middle;
+    background-color: #f8f7cd;
+    color: orange;
+    border-radius: 4%;
+}
+
+view.help {
+    font-size: 34rpx;
+    font-weight: bold;
+    font-style: italic;
+    color: gray;
+    padding: 16rpx;
+}
+
+.ready-button {
+    border-radius: 50%;
+    background-color: #1AAD19;
+    position: fixed;
+    right: 32rpx;
+    bottom: 60rpx;
+    padding: 24rpx;
+}
+
+.ready-text {
+    color: white;
+    font-weight: 900;
+    font-size: 64rpx;
+    width: 50rpx;
+    height: 50rpx;
+    margin: 24rpx;
+    padding: 0rpx;
+}
+
+.primary-button {
+    width: 72%;
+    background-color: #1AAD19;
+    color: white;
+    padding: 20rpx;
+    font-weight: bolder;
+    font-size: large;
+    margin: 24rpx auto;
+}
+
+.countdown-page {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: red;
+    font-weight: bolder;
+    font-size: 256rpx;
+}
+
+.timer-page {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.timer-num {
+    color: black;
+    font-weight: bolder;
+    font-size: 192rpx;
+    position: relative;
+}
+
+.progress-box {
+    width: 90%;
+    position: absolute;
+    bottom: 100rpx;
+}
+
+
+.score-title {
+    background-color: #1AAD19;
+    color: white;
+    font-weight: bolder;
+    width: 832rpx;
+}
+
+
+.score-row {
+    font-weight: bold;
+    width: 832rpx;
+    border-top: outset;
+}

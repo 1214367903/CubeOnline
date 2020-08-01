@@ -1,0 +1,10 @@
+{
+    "navigationBarTitleText": "主页",
+    "usingComponents": {
+        "mp-icon": "/components/weui/icon/icon",
+        "mp-cells": "/components/weui/cells/cells",
+        "mp-cell": "/components/weui/cell/cell",
+        "mp-actionSheet": "/components/weui/actionsheet/actionsheet",
+        "my-modal": "/components/modal/modal"
+    }
+}

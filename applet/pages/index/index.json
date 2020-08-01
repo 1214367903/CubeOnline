@@ -1,0 +1,8 @@
+{
+    "navigationBarTitleText": "主页",
+    "usingComponents": {
+        "mp-cells": "/components/weui/cells/cells",
+        "mp-cell": "/components/weui/cell/cell",
+        "my-modal": "/components/modal/modal"
+    }
+}

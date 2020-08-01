@@ -1,0 +1,62 @@
+<!-- 这一部分是主页,显示几个按钮什么的 -->
+<view class="container">
+    <text class="title">Cube-Online</text>
+    <button class="primary-button" bindtap="show_modal" data-var_name="show_crm">创建房间</button>
+    <button class="primary-button" bindtap="show_modal" data-var_name="show_srm">加入房间</button>
+    <button class="primary-button" bindtap="show_modal" data-var_name="show_rrm">随机推荐</button>
+    <text bindtap="show_about_page" style="margin-top:20rpx">关于</text>
+</view>
+<!-- 这个模态框用于创建房间 -->
+<my-modal show="{{show_crm}}" height="70%" bindconfirm="request_create_room">
+    <mp-cells title="比赛项目">
+        <mp-cell>
+            <picker range="{{contest_items}}" value="{{contest_index}}" bindchange="on_change" data-var_name="contest_index">
+                <label class="picker">{{contest_items[contest_index]}}</label>
+                <label style="float:right;color:gary">></label>
+            </picker>
+        </mp-cell>
+    </mp-cells>
+    <mp-cells title="还原时限">
+        <mp-cell>
+            <view>
+                <slider style="display:inline-block;width:76%" max="{{9}}" show-value="{{true}}" value="{{minute_limit}}" bindchange="on_change" data-var_name="minute_limit" />
+                <text class="time-label">分</text>
+            </view>
+            <view>
+                <slider style="display:inline-block;width:76%" max="{{59}}" show-value="{{true}}" value="{{second_limit}}" bindchange="on_change" data-var_name="second_limit" />
+                <label class="time-label">秒</label>
+            </view>
+        </mp-cell>
+    </mp-cells>
+    <mp-cells title="其它设置">
+        <mp-cell>
+            <label>只能通过房间号找到</label>
+            <switch checked="{{ is_room_private }}" bindchange="on_change" data-var_name="is_room_private" style="float:right" />
+        </mp-cell>
+    </mp-cells>
+</my-modal>
+<!-- 这个模态框用于加入房间 -->
+<my-modal show="{{show_srm}}" height="30%" bindconfirm="request_join_room">
+    <mp-cells title="加入房间">
+        <mp-cell>
+            <input placeholder="输入房间号" type="number" maxlength="4" value="{{room_id}}" bindblur="on_change" data-var_name="room_id"></input>
+        </mp-cell>
+    </mp-cells>
+</my-modal>
+<!-- 这个模态框用于随机获取房间 -->
+<my-modal show="{{show_rrm}}" height="30%" bindconfirm="request_random_room">
+    <mp-cells title="比赛项目">
+        <mp-cell>
+            <picker range="{{contest_items}}" value="{{contest_index}}" bindchange="on_change" data-var_name="contest_index">
+                <label class="picker">{{contest_items[contest_index]}}</label>
+                <label style="float:right;color:gary">></label>
+            </picker>
+        </mp-cell>
+    </mp-cells>
+</my-modal>
+<!-- 这个模态框用于展示信息, 它是公用的 -->
+<my-modal show="{{show_im}}" height="20%" can_cancel="{{can_im_cancel}}" bindconfirm="modal_confirm_callback" bindcancel="modal_cancel_callback">
+    <view class="information">
+        <text class="information">{{information}}</text>
+    </view>
+</my-modal>

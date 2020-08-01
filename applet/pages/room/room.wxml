@@ -1,0 +1,199 @@
+<!-- 主页面部分, 也就是准备阶段看到的页面 -->
+<view hidden="{{hide_room_page}}">
+    <view>
+        <view class="title-icon" bindtap="left_room">
+            <mp-icon icon="back2" size="{{30}}"></mp-icon>
+        </view>
+        <view class="room-settings">
+            <label>比赛项目-></label>
+            <label class="tag">{{contest_item}}</label>
+        </view>
+        <view class="room-settings">
+            <label>还原时限-></label>
+            <label class="tag">{{timer_func.elapsed_time(time_limit, 0)}}</label>
+        </view>
+        <view class="title-icon" bindtap="show_modal" data-var_name="show_sm">
+            <mp-icon icon="setting" type="field" size="{{30}}"></mp-icon>
+        </view>
+    </view>
+    <!-- 主页第二部分,显示打乱 -->
+    <scroll-view scroll-y="{{true}}" style="height:{{scramble_area_height}}rpx">
+        <view class="scramble">
+            <text style="font-size:{{scramble_font_size}}rpx">{{scramble}}</text>
+        </view>
+    </scroll-view>
+    <!-- 主页第三部分,显示房间成员 -->
+    <scroll-view scroll-x="{{true}}">
+        <view class="member-title">
+            <text class="small-table-cell">状态</text>
+            <text class="big-table-cell">选手</text>
+            <view class="table-cell" wx:for="{{member_title_items}}" wx:key="*this">
+                <text>{{item}}</text>
+            </view>
+        </view>
+        <view class="member-row" wx:for="{{members}}" wx:key="id">
+            <view class="{{member_func.get_style(item.id===user_id)}}">
+                <view class="small-table-cell">
+                    <icon class="state-icon" type="{{icon_func.icon_state(item.state)}}" />
+                </view>
+                <view class="big-table-cell">
+                    <view style="text-align:left;margin-left:20rpx">
+                        <image class="member-icon" src="{{item.usericon}}" />
+                        <text class="member-name">{{item.username}}</text>
+                    </view>
+                </view>
+                <!-- 这里再搞个循环的话, 反而会变得更复杂, 所以先写死得了 -->
+                <view class="table-cell">{{item.point}}</view>
+                <view class="table-cell">
+                    <text>{{score_func.num_fixed(item.best)}}</text>
+                </view>
+                <view class="table-cell">{{score_func.num_fixed(item.average)}}</view>
+                <view class="table-cell">{{item.solved}}</view>
+                <view class="table-cell">{{item.tried}}</view>
+            </view>
+        </view>
+    </scroll-view>
+    <!-- 主页第四部分,显示一些提示什么的 -->
+    <view class="notice-bar">
+        <mp-icon icon="volume-up" color="orange" style="margin-right:20rpx"></mp-icon>
+        <text>{{notice_bar_content}}</text>
+    </view>
+    <view class="help">
+        <text>打乱并观察完毕之后, 点击右下角的按钮进入准备状态. 当房间内最少有两人, 且所有人都进入准备状态后, 本轮比赛自动开始.</text>
+    </view>
+    <!-- 这个浮动按钮用于开始比赛 -->
+    <view class="ready-button" bindtap="on_user_ready">
+        <text class="ready-text">✔</text>
+    </view>
+</view>
+<!-- 这个页面的第二部分, 计时器页面 -->
+<!-- 首先进入倒计时界面, 在倒计时结束的时候,隐藏倒计时界面,进入计时界面 -->
+<view class="countdown-page" hidden="{{hide_countdown_page}}">
+    <text>{{countdown_seconds}}</text>
+</view>
+<view class="timer-page" hidden="{{hide_timer_page}}" bindtap="stop_timer">
+    <view class="timer-num">
+        <text>{{timer_func.elapsed_time(current_time)}}</text>
+    </view>
+    <view class="progress-box">
+        <progress percent="{{100-current_time*100/time_limit}}" />
+    </view>
+    <!-- <progress perent="{{100-current_time*100/time_limit}}" active="{{true}}" /> -->
+</view>
+<!-- 这个模态框用于展示信息, 它是公用的 -->
+<my-modal show="{{show_im}}" height="20%" can_cancel="{{can_im_cancel}}" bindconfirm="modal_confirm_callback" bindcancel="modal_cancel_callback">
+    <view class="information">
+        <text class="information">{{information}}</text>
+    </view>
+</my-modal>
+<!-- 这个模态框是房间设置, 可以修改打乱的字体大小等 -->
+<my-modal show="{{show_sm}}" height="50%">
+    <mp-cells title="房间设置">
+        <mp-cell>
+            <text>打乱字体大小</text>
+            <slider min="{{16}}" max="{{64}}" show-value="{{true}}" value="{{scramble_font_size}}" bindchanging="on_change" bindchange="on_change" data-var_name="scramble_font_size" />
+        </mp-cell>
+        <mp-cell>
+            <text>打乱区域高度</text>
+            <slider min="{{120}}" max="{{320}}" show-value="{{true}}" value="{{scramble_area_height}}" bindchanging="on_change" bindchange="on_change" data-var_name="scramble_area_height" />
+        </mp-cell>
+    </mp-cells>
+</my-modal>
+<!-- 这是个上拉菜单, 在计时结束之后让用户选择惩罚 -->
+<mp-actionSheet bindactiontap="select_punishment_callback" show="{{show_pas}}" actions="{{punishments}}" title="选择惩罚" show-cancel="{{false}}" mask-closable="{{false}}"></mp-actionSheet>
+<!-- 这个元素用于在比赛结束后显示结果 -->
+<my-modal show="{{show_result_page}}" show_buttons="{{false}}">
+    <view style="text-align:center;font-size:48rpx;margin:16rpx">
+        <text>本轮成绩</text>
+    </view>
+    <scroll-view scroll-x="{{true}}">
+        <view class="score-title">
+            <text class="big-table-cell">选手</text>
+            <text class="table-cell">成绩</text>
+            <text class="table-cell">排名</text>
+            <text class="table-cell">本轮积分</text>
+        </view>
+        <view class="score-row" wx:for="{{current_scores}}" wx:key="id">
+            <view class="{{member_func.get_style(item.id===user_id)}}">
+                <view class="big-table-cell">
+                    <view style="text-align:left;margin-left:20rpx">
+                        <image class="member-icon" src="{{item.usericon}}" />
+                        <text class="member-name">{{item.username}}</text>
+                    </view>
+                </view>
+                <view class="table-cell">
+                    <text>{{score_func.num_fixed(item.score)}}</text>
+                    <text class="personal-best" hidden="{{!item.is_pb}}">PB</text>
+                </view>
+                <view class="table-cell">{{item.rank}}</view>
+                <view class="table-cell">{{item.point}}</view>
+            </view>
+        </view>
+    </scroll-view>
+    <button wx:if="{{result_page_closeable}}" class="primary-button" bindtap="close_result_page">
+        确定
+    </button>
+</my-modal>
+<!-- 这个函数把用户的成绩转为2位小数的形式 -->
+<wxs module="score_func">
+    module.exports = {
+        num_fixed: function (value, n) {
+            if (n===undefined) {n = 2}
+            if (value === null || value === 0) {
+                return '-'
+            } else if (typeof (value) === 'string') {
+                return value
+            } else if (value < 60) {
+                return value.toFixed(n)
+            } else {
+                var minute = parseInt(value / 60)
+                var second = (value % 60).toFixed(n)
+                if (second < 10) {
+                    second = '0' + second
+                }
+                return minute + ':' + second
+            }
+        }
+    }
+</wxs>
+<!-- 这个函数把用户的状态转变为对应的图标状态 -->
+<wxs module="icon_func">
+    module.exports = {
+        icon_state: function (state) {
+            return {
+                'unready': 'waiting',
+                'ready': 'success'
+            }[state]
+        }
+    }
+</wxs>
+<!-- 这个函数把要显示的时间转化为分-秒的形式 -->
+<wxs module="timer_func">
+    module.exports = {
+        elapsed_time: function (value, n) {
+            if(n===undefined){n=2}
+            if (typeof(value) !== 'number') {
+                return value
+            } else if (value < 60) {
+                return value.toFixed(n)
+            } else {
+                var minute = parseInt(value / 60)
+                var second = (value % 60).toFixed(n)
+                if (second < 10) {
+                    second = '0' + second
+                }
+                return minute + ':' + second
+            }
+        }
+    }
+</wxs>
+<!-- 这个函数根据用户是否是本人,返回对应的样式 -->
+<wxs module="member_func">
+    module.exports = {
+        get_style: function (is_user) {
+            if(is_user){
+                return 'user-style'
+            }else{return ''}
+        }
+    }
+</wxs>

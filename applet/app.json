@@ -1,0 +1,19 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/room/room",
+        "pages/about/about",
+        "pages/login/login"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "WeChat",
+        "navigationBarTextStyle": "black"
+    },
+    "style": "v2",
+    "sitemapLocation": "sitemap.json",
+    "useExtendedLib": {
+        "weui": true
+    }
+}
