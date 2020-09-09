@@ -6,8 +6,8 @@
 
 - [部署](#部署)
 - [服务流程](#服务流程)
-  - [1. http部分](#1-http部分)
-  - [2. WebSocket部分](#2-websocket部分)
+  - [http部分](#http部分)
+  - [WebSocket部分](#websocket部分)
 - [额外部分](#额外部分)
   - [后端的form组件](#后端的form组件)
   - [后端的session组件](#后端的session组件)
@@ -26,12 +26,12 @@
 
 ## 服务流程
 
-### 1. http部分
+### http部分
    
    目前后端提供```/user/login```,```/room/create```和```/room/random```三个http接口, 负责用户的登录, 以及为用户提供可加入的房间号码. 其工作流程如下:
 
    ![http_img](https://github.com/1214367903/CubeOnline/blob/master/pictures/http.png)
-### 2. WebSocket部分
+### WebSocket部分
    
    获取到房间号之后, 用户就可以进入房间页面, 创建WebSocket连接与后端进行通信.
 
