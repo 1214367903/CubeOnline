@@ -1,4 +1,4 @@
-// 每隔59秒ping一次
+// 每隔15秒ping一次
 const PING_INTERVAL = 15 * 1000
 
 
