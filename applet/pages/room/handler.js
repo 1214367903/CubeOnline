@@ -38,9 +38,9 @@ class EventHandler {
         this.page.setData({
             'members': members
         })
-    }
-    start_round(data){
-        this.page.start_round()
+        if (data.can_start_round) {
+            this.page.start_round()
+        }
     }
     update_score(data) {
         // 更新成绩,顺便确定是否是最好成绩

@@ -86,8 +86,7 @@ App({
         session_id: null,
         logged: false,
         is_user_authorized: false,
-        //在这里填入你的后端url
-        url: '',
+        url: 'zeyuliu.xyz',
         applet: typeof (qq) === "undefined" ? "wx" : "qq"
     }
 })

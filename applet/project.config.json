@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": false,
 		"preloadBackgroundData": false,
@@ -26,7 +26,7 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": true,
+		"useCompilerModule": false,
 		"userConfirmedUseCompilerModuleSwitch": false,
 		"remoteDebugLogEnable": false
 	},
@@ -40,7 +40,7 @@
 	"isGameTourist": false,
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
-	"qqappid": "1110718698",
+	"qqappid": "1108245641",
 	"scripts": {
 		"beforeCompile": "",
 		"beforePreview": "",

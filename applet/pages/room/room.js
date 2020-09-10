@@ -277,7 +277,7 @@ Page({
         })
     },
     onShareAppMessage: function () {
-        // QQ小程序非得加上这个, 不然老是审核不通过
+        // QQ小程序非得往这个方法里面写内容, 不然老是审核不通过
         if (app.global_data.applet !== 'qq') {
             return
         }
@@ -289,7 +289,7 @@ Page({
     _on_open: function (header, profile) {},
     _on_close: function (message) {
         // 虽然官方说的是会给出code和reason两个参数,但是实际上只获得一个参数
-        let info = `连接已断开, 信息:${message.reason}, 现在回到主页`
+        let info = `连接已断开, 信息:"${message.reason}", 现在回到主页`
         if (this.data.websocket.is_ping_failed) {
             info = '你的网络似乎不稳定...' + info
         }

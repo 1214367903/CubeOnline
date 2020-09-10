@@ -1,5 +1,5 @@
 // 每隔59秒ping一次
-const PING_INTERVAL = 59 * 1000
+const PING_INTERVAL = 15 * 1000
 
 
 class WebSocketClient {
@@ -27,6 +27,7 @@ class WebSocketClient {
         this.is_ping_failed = false
     }
     start_heart_beat(ws_client) {
+        // 在开启连接之后调用这个方法开始心跳
         // 心跳的机制是,把时间戳发给服务器,同时也存入last_ping_flag这个变量中
         // 服务器收到之后再原封不动地发回来,这时如果和本地的last_ping_flag是一个值,就把这个值消了
         // ping发送成功后,等一段间隔继续发
@@ -49,7 +50,11 @@ class WebSocketClient {
                 ws_client.send(data, success)
             }
         }
-        heart_beat(ws_client)
+        // 需要注意的是,心跳是on_open的时候开始的
+        // 因此,调用这个方法不会立即发送ping包,而是在一个ping延迟之后才开始发送
+        ws_client.ping_timer = setTimeout(function () {
+            heart_beat(ws_client)
+        }, PING_INTERVAL)
     }
     stop_heart_beat(ws_client) {
         ws_client.last_ping_flag = null

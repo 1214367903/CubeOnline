@@ -5,6 +5,7 @@ from collections.abc import Coroutine
 from typing import Any, Callable, Optional, Union
 
 from tornado.escape import json_decode
+from tornado.ioloop import IOLoop
 
 from form.forms import BaseForm
 from util import cache
@@ -24,8 +25,8 @@ user这个模块就是围绕着redis来的
 
 async def create_cache(session_id: str, form_obj: BaseForm) -> None:
     # 调用这个方法将需要的用户的数据存入缓存,然后就可以调用下面的函数获取session对象了
-    userData = {key: form_obj.get(key) for key in user_items}
-    await redis.hmset_dict(session_id, userData)
+    user_data = {key: form_obj.get(key) for key in user_items}
+    await redis.hmset_dict(session_id, user_data)
 
 
 async def create_session_obj(session_id: str) -> Optional['Session']:
@@ -61,7 +62,7 @@ class Session:
         value = json.dumps(value)
         await redis.hset(self.session_id, key, value)
         if timeout is not None:
-            await self.expire(key, timeout)
+            IOLoop.current().add_callback(self.expire, key, timeout)
 
     async def expire(self, key: hash_type, seconds: int) -> None:
         await asyncio.sleep(seconds)
