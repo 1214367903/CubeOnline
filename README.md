@@ -1,6 +1,6 @@
 # CubeOnline
 
-**CubeOnline**是一个支持实时在线PK魔方的小程序, 玩家进入房间并创建`websocket`连接, 然后进行实时竞技. 服务器基于`pypy3.6`和`tornado6.0.3`实现.
+**CubeOnline**是一个支持实时在线PK魔方的小程序, 玩家进入房间并创建`websocket`连接, 然后进行实时竞技. 服务器基于`pypy3.6`和`tornado6.0.4`实现.
 
 ## 内容列表
 
